@@ -2,6 +2,7 @@
 ## functions do
 
 ## Write a short comment describing this function
+## This function creates an invertible matrix object and cache it
 
 makeCacheMatrix <- function(x = matrix()) {
   r <- NULL
@@ -21,16 +22,21 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## Write a short comment describing this function
+## This function checks to see if the inverse of the matrix above exists. 
+## It returns it if it does anf if not, then, it calculates it.
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-  r<-x$getmatrix()
-  if(!is.null(r)){
+  r <- x$getinverse()
+  if (!is.null(r)) {
     message("getting cached data")
     return(r)
   }
-  matrix<-x$get
-  r<-solve(matrix, ...)
-  x$setmatrix(r)
+  data <- x$get()
+  r <- solve(data, ...)
+  x$setinverse(r)
   r
 }
+B <- matrix(c(1,2,3,4),2,2)
+B1 <- makeCacheMatrix(B)
+cacheSolve(B1)
